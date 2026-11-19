@@ -1,0 +1,92 @@
+
+<div class="card mobile-card">
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-md-3">
+        <div class="img-container ">
+          <ng-container *ngIf="mobileObj.image && !imageFailed; else noImg">
+
+            <img
+              [src]="mobileObj.image"
+              [alt]="mobileObj.name"
+              (error)="onImageError()">
+
+          </ng-container>
+
+          <ng-template #noImg>
+
+            <img
+              src="assets/images/default-mobile.png"
+              class="noProduct"
+              alt="Default mobile image">
+
+            <span class="no-image-text">
+              No Product Image !!!
+            </span>
+
+          </ng-template>
+
+        </div>
+
+      </div>
+
+
+      <div class="col-md-6 mb-0">
+        <div class="product-details">
+
+          <h3>
+            {{ mobileObj.name }}
+
+            <span
+              class="rating"
+              [ngClass]="{
+                'rating-high': mobileObj.rating >= 4,
+                'rating-medium': mobileObj.rating >= 3 && mobileObj.rating < 4,
+                'rating-low': mobileObj.rating < 3
+              }">
+
+              {{ mobileObj.rating }}
+
+            </span>
+          </h3>
+
+          <h5>Features :</h5>
+
+          <ul class="list-group list-group-flush">
+
+            <li
+              class="list-group-item"
+              *ngFor="let feature of mobileObj.features">
+
+              {{ feature }}
+
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+
+      <div class="col-md-3">
+        <div class="price-section">
+
+          <h3 class="final-price">
+            {{ getDiscountedPrice() | currency:'INR':'symbol':'1.2-2' }}
+          </h3>
+
+          <p class="original-price">
+
+            <del>
+              {{ mobileObj.price | currency:'INR':'symbol':'1.2-2' }}
+            </del>
+
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
